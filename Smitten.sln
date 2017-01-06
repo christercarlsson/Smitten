@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AB2EB38D-FF79-4A78-9FDB-89B2F3C49AE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1316AAB-971A-4179-AC63-AB96E04A7BEC}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Smitten.Api", "src\Smitten.Api\Smitten.Api.xproj", "{BE67D60A-D226-41D0-BFE5-837F1D550D39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE67D60A-D226-41D0-BFE5-837F1D550D39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE67D60A-D226-41D0-BFE5-837F1D550D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE67D60A-D226-41D0-BFE5-837F1D550D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE67D60A-D226-41D0-BFE5-837F1D550D39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE67D60A-D226-41D0-BFE5-837F1D550D39} = {AB2EB38D-FF79-4A78-9FDB-89B2F3C49AE4}
+	EndGlobalSection
+EndGlobal
