@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Smitten.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Smitten.Api
 {
@@ -16,6 +18,11 @@ namespace Smitten.Api
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=SmittenDb;Trusted_Connection=True";
+            services.AddDbContext<SmittenContext>(o => o.UseSqlServer(connectionString));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -27,6 +34,8 @@ namespace Smitten.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMvc();
 
             app.Run(async (context) =>
             {
