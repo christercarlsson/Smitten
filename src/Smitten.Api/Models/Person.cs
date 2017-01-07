@@ -16,5 +16,6 @@ namespace Smitten.Api.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
+        public ICollection<Smite> Smites { get; set; } = new List<Smite>();
     }
 }

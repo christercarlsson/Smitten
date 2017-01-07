@@ -8,7 +8,7 @@ using Smitten.Api.Models;
 namespace Smitten.Api.Migrations
 {
     [DbContext(typeof(SmittenContext))]
-    [Migration("20170106123637_InitialMigration")]
+    [Migration("20170106234111_Initial-Migration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace Smitten.Api.Migrations
             modelBuilder.Entity("Smitten.Api.Models.Smite", b =>
                 {
                     b.HasOne("Smitten.Api.Models.Person", "Person")
-                        .WithMany()
+                        .WithMany("Smites")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

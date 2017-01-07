@@ -51,7 +51,7 @@ namespace Smitten.Api.Migrations
             modelBuilder.Entity("Smitten.Api.Models.Smite", b =>
                 {
                     b.HasOne("Smitten.Api.Models.Person", "Person")
-                        .WithMany()
+                        .WithMany("Smites")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
