@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Smitten.Api.Models;
+using Smitten.Api.Services;
 using Smitten.Api.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,15 @@ namespace Smitten.Api.Controllers
     [Route("api/dummy")]
     public class DummyController : Controller
     {
-        SmittenContext _ctx;
+        private ISmittenRepository _repository;
 
-        public DummyController(SmittenContext ctx) {
-            _ctx = ctx;
+        public DummyController(ISmittenRepository repository) {
+            _repository = repository;
         }
 
         [HttpGet]
         public IActionResult Get() {
-            var resultFromDb = _ctx.People.Include(p => p.Smites).ToList();
+            var resultFromDb = _repository.GetPeople();
 
             var result = Mapper.Map<IEnumerable<PersonDto>>(resultFromDb);
 
@@ -30,7 +31,7 @@ namespace Smitten.Api.Controllers
 
         [HttpGet("{id}")]
         public IActionResult GetPerson(int id) {
-            var resultfromDb = _ctx.People.Include(s => s.Smites).Where(p => p.Id == id).SingleOrDefault();
+            var resultfromDb = _repository.GetPerson(id);
             if (resultfromDb == null)
                 return NotFound();
 

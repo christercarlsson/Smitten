@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Smitten.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Smitten.Api.Services;
 
 namespace Smitten.Api
 {
@@ -34,6 +35,7 @@ namespace Smitten.Api
 
             var connectionString = Configuration["connectionStrings:smittenDbConnectionString"];
             services.AddDbContext<SmittenContext>(o => o.UseSqlServer(connectionString));
+            services.AddScoped<ISmittenRepository, SmittenRepository>();
 
         }
 
