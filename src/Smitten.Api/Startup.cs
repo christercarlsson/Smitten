@@ -46,7 +46,11 @@ namespace Smitten.Api
             }
 
             smittenContext.SeedData();
+            AutoMapper.Mapper.Initialize(cfg => {
+                cfg.CreateMap<Models.Person, ViewModels.PersonDto>();
+                cfg.CreateMap<Models.Smite, ViewModels.SmiteDto>();
 
+            });
             app.UseMvc();
 
             app.Run(async (context) => {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Smitten.Api.Models;
 using Smitten.Api.ViewModels;
@@ -21,21 +22,8 @@ namespace Smitten.Api.Controllers
         [HttpGet]
         public IActionResult Get() {
             var resultFromDb = _ctx.People.Include(p => p.Smites).ToList();
-            var result = new List<PersonDto>();
 
-            foreach (var person in resultFromDb) {
-                var personDto = new PersonDto();
-                personDto.Id = person.Id;
-                personDto.Name = person.Name;
-                foreach (var smite in person.Smites) {
-                    var smiteDto = new SmiteDto();
-                    smiteDto.Id = smite.Id;
-                    smiteDto.Date = smite.Date;
-                    personDto.Smites.Add(smiteDto);
-                }
-                result.Add(personDto);
-            }
-
+            var result = Mapper.Map<IEnumerable<PersonDto>>(resultFromDb);
 
             return Ok(result);
         }
@@ -46,15 +34,7 @@ namespace Smitten.Api.Controllers
             if (resultfromDb == null)
                 return NotFound();
 
-            var result = new PersonDto();
-            result.Name = resultfromDb.Name;
-            result.Id = resultfromDb.Id;
-            foreach (var smite in resultfromDb.Smites) {
-                var smiteDto = new SmiteDto();
-                smiteDto.Id = smite.Id;
-                smiteDto.Date = smite.Date;
-                result.Smites.Add(smiteDto);
-            }
+            var result = Mapper.Map<PersonDto>(resultfromDb);
 
             return Ok(result);
         }
