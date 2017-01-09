@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Smitten.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Smitten.Api.Services;
@@ -34,7 +33,7 @@ namespace Smitten.Api
             services.AddMvc();
 
             var connectionString = Configuration["defaultConnection"];
-            services.AddDbContext<SmittenContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<Models.SmittenContext>(o => o.UseSqlServer(connectionString));
             services.AddScoped<ISmittenRepository, SmittenRepository>();
 
         }
