@@ -33,7 +33,7 @@ namespace Smitten.Api
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc();
 
-            var connectionString = Configuration["connectionStrings:smittenDbConnectionString"];
+            var connectionString = Configuration["defaultConnection"];
             services.AddDbContext<SmittenContext>(o => o.UseSqlServer(connectionString));
             services.AddScoped<ISmittenRepository, SmittenRepository>();
 
