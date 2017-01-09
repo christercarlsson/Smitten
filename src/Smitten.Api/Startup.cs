@@ -51,6 +51,8 @@ namespace Smitten.Api
             AutoMapper.Mapper.Initialize(cfg => {
                 cfg.CreateMap<Models.Person, ViewModels.PersonDto>();
                 cfg.CreateMap<Models.Smite, ViewModels.SmiteDto>();
+                cfg.CreateMap<ViewModels.SmiteCreateDto, Models.Smite>();
+
 
             });
             app.UseMvc();
