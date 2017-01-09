@@ -15,22 +15,37 @@ namespace Smitten.Api.Services
             _context = context;
         }
 
-        public IEnumerable<Person> GetPeople() {
-            var result = _context
-                .People.Include(p => p.Smites)
-                .ToList();
+        public IEnumerable<Person> GetPeople(bool includeSmites) {
+            IEnumerable<Person> people;
+            if (includeSmites)
+                people = _context.People.Include(p => p.Smites).ToList();
+            else
+                people = _context.People.ToList();
 
-            return result;
+            return people;
+        }
+        public Person GetPerson(int id) => _context.People
+                                                   .Where(p => p.Id == id)
+                                                   .Include(p => p.Smites)
+                                                   .SingleOrDefault();
+        public bool PersonExists(int id) => _context.People.Any(p => p.Id == id);
+
+        public IEnumerable<Smite> GetSmitesForPerson(int personId) =>
+            _context.Smites.Where(s => s.PersonId == personId).ToList();
+
+        public void AddSmiteToPerson(int personId, Smite smite) {
+            var person = GetPerson(personId);
+            if (person == null) {
+                throw new ArgumentException("personId");
+            }
+            person.Smites.Add(smite);
         }
 
-        public Person GetPerson(int id) {
-            var result =_context
-                .People
-                .Where(p => p.Id == id)
-                .Include(p => p.Smites)
-                .SingleOrDefault();
+        public bool Save() => _context.SaveChanges() > 0;
 
-            return result;
-        }
+        public Smite GetSmiteForPerson(int personId, int smiteId) => _context.Smites.Where(p => p.PersonId == personId && p.Id == smiteId).SingleOrDefault();
+
+        public void DeleteSmite(Smite smiteEntity) => _context.Smites.Remove(smiteEntity);
+
     }
 }

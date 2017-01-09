@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace Smitten.Api.Controllers
 {
-    [Route("api/dummy")]
-    public class DummyController : Controller
+    [Route("api/people")]
+    public class PeopleController : Controller
     {
         private ISmittenRepository _repository;
 
-        public DummyController(ISmittenRepository repository) {
+        public PeopleController(ISmittenRepository repository) {
             _repository = repository;
         }
 
         [HttpGet]
-        public IActionResult Get() {
-            var resultFromDb = _repository.GetPeople();
+        public IActionResult Get(bool withSmites) {
+            var resultFromDb = _repository.GetPeople(withSmites);
 
             var result = Mapper.Map<IEnumerable<PersonDto>>(resultFromDb);
 

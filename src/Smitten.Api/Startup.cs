@@ -33,7 +33,7 @@ namespace Smitten.Api
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc();
 
-            var connectionString = Configuration["connectionStrings:smittenDbConnectionString"];
+            var connectionString = Configuration["defaultConnection"];
             services.AddDbContext<SmittenContext>(o => o.UseSqlServer(connectionString));
             services.AddScoped<ISmittenRepository, SmittenRepository>();
 
@@ -51,6 +51,8 @@ namespace Smitten.Api
             AutoMapper.Mapper.Initialize(cfg => {
                 cfg.CreateMap<Models.Person, ViewModels.PersonDto>();
                 cfg.CreateMap<Models.Smite, ViewModels.SmiteDto>();
+                cfg.CreateMap<ViewModels.SmiteCreateDto, Models.Smite>();
+
 
             });
             app.UseMvc();
