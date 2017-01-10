@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Smitten.Api.Services;
+using Smitten.Api.Models;
+using Smitten.Api.ViewModels;
 
 namespace Smitten.Api
 {
@@ -48,9 +50,9 @@ namespace Smitten.Api
 
             smittenContext.SeedData();
             AutoMapper.Mapper.Initialize(cfg => {
-                cfg.CreateMap<Models.Person, ViewModels.PersonDto>();
-                cfg.CreateMap<Models.Smite, ViewModels.SmiteDto>();
-                cfg.CreateMap<ViewModels.SmiteCreateDto, Models.Smite>();
+                cfg.CreateMap<Person, PersonDto>();
+                cfg.CreateMap<Smite, SmiteDto>();
+                cfg.CreateMap<SmiteCreateDto, Smite>();
 
 
             });
